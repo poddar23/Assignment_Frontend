@@ -1,0 +1,63 @@
+/* Page styling */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f6f7fb;
+}
+
+/* Header */
+.header {
+  background-color: #4a90e2;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Flex container for layout */
+.container {
+  display: flex;
+  min-height: 70vh;
+  justify-content: flex-start; /* Items begin from left */
+  align-items: stretch;        /* Equal height columns */
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: #dbe8ff;
+  width: 220px;
+  padding: 20px;
+  border-right: 2px solid #c4d4f5;
+}
+
+/* Main content */
+.content {
+  flex: 1; /* expands to take remaining space */
+  background-color: #ffffff;
+  padding: 25px;
+  display: flex;
+  justify-content: center; /* Demo: centers text horizontally */
+  align-items: center;     /* Demo: centers text vertically */
+}
+
+/* Footer */
+.footer {
+  background-color: #4a90e2;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+/* Responsive Layout — Stack on smaller screens */
+@media (max-width: 700px) {
+  .container {
+    flex-direction: column; /* sidebar moves above content */
+    align-items: center;
+  }
+
+  .sidebar {
+    width: 100%;
+    text-align: center;
+    border-right: none;
+    border-bottom: 2px solid #c4d4f5;
+  }
+}

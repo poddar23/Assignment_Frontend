@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sample Webpage with Nav, Form, Table, Images & Lists</title>
+  <style>
+    :root {
+      --accent: #2563eb;
+      --accent-2: #1f2937;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #6b7280;
+      --radius: 14px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.5;
+    }
+
+    /* ====== Top Navigation ====== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+    }
+    .brand {
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      color: var(--accent-2);
+    }
+    .nav a {
+      text-decoration: none;
+      color: var(--accent-2);
+      margin-left: 16px;
+      padding: 8px 10px;
+      border-radius: 999px;
+    }
+    .nav a:hover,
+    .nav a:focus {
+      outline: none;
+      background: #e5e7eb;
+    }
+
+    /* ====== Layout ====== */
+    main {
+      max-width: 1100px;
+      padding: 24px 20px 60px;
+      margin: 0 auto;
+      display: grid;
+      gap: 28px;
+    }
+    section {
+      background: var(--card);
+      border: 1px solid #e5e7eb;
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+    section h2 {
+      margin-top: 0;
+    }
+    .muted { color: var(--muted); }
+
+    /* ====== Form ====== */
+    form {
+      display: grid;
+      gap: 14px;
+      max-width: 520px;
+    }
+    .field {
+      display: grid;
+      gap: 6px;
+    }
+    label {
+      font-weight: 600;
+    }
+    input[type="text"],
+    input[type="email"],
+    select {
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 1rem;
+      width: 100%;
+      background: #fff;
+    }
+    .inline {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    button {
+      border: none;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      padding: 10px 16px;
+      cursor: pointer;
+      width: fit-content;
+    }
+    button:hover { filter: brightness(0.95); }
+
+    /* ====== Table ====== */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    caption {
+      caption-side: top;
+      text-align: left;
+      padding: 10px 0;
+      font-weight: 700;
+    }
+    thead th {
+      text-align: left;
+      background: #f3f4f6;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 10px;
+    }
+    tbody td {
+      border-bottom: 1px solid #f1f5f9;
+      padding: 10px;
+    }
+    tbody tr:hover {
+      background: #f9fafb;
+    }
+
+    /* ====== Gallery ====== */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+    }
+    .gallery figure {
+      margin: 0;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .gallery img {
+      display: block;
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+    .gallery figcaption {
+      padding: 10px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 30px 0 60px;
+    }
+  </style>
+</head>
+<body>
+  <!-- ====== Navigation with anchor tags ====== -->
+  <header>
+    <nav aria-label="Primary" class="nav">
+      <div class="brand">My Demo Site</div>
+      <div>
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#signup">Sign Up</a>
+        <a href="#data">User Data</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#lists">Lists</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ====== Home ====== -->
+    <section id="home" aria-labelledby="home-title">
+      <h2 id="home-title">Welcome</h2>
+      <p class="muted">This page demonstrates a navigation menu, a form, a data table, images with alt text, and both ordered and unordered lists.</p>
+    </section>
+
+    <!-- ====== Unordered List (Features) ====== -->
+    <section id="features" aria-labelledby="features-title">
+      <h2 id="features-title">Features (Unordered List)</h2>
+      <ul>
+        <li>Accessible, labeled form fields.</li>
+        <li>Data table with headers and a caption.</li>
+        <li>Responsive image gallery with descriptive alt text.</li>
+        <li>Clean, responsive design.</li>
+      </ul>
+    </section>
+
+    <!-- ====== Form with inputs, labels, submit ====== -->
+    <section id="signup" aria-labelledby="signup-title">
+      <h2 id="signup-title">Sign Up</h2>
+      <p class="muted">Fill out the form and submit to add a user to the table below.</p>
+
+      <form id="user-form">
+        <div class="field">
+          <label for="name">Full Name</label>
+          <input id="name" name="name" type="text" placeholder="Ada Lovelace" required />
+        </div>
+
+        <div class="field">
+          <label for="email">Email Address</label>
+          <input id="email" name="email" type="email" placeholder="ada@example.com" required />
+        </div>
+
+        <div class="field">
+          <label for="role">Role</label>
+          <select id="role" name="role" required>
+            <option value="">Select a role</option>
+            <option>Admin</option>
+            <option>Editor</option>
+            <option>Viewer</option>
+          </select>
+        </div>
+
+        <div class="inline">
+          <input id="subscribe" name="subscribe" type="checkbox" />
+          <label for="subscribe">Subscribe to newsletter</label>
+        </div>
+
+        <button type="submit" aria-label="Submit form and add user to table">Submit</button>
+      </form>
+    </section>
+
+    <!-- ====== Table to display user data ====== -->
+    <section id="data" aria-labelledby="data-title">
+      <h2 id="data-title">User Data Table</h2>
+
+      <table id="users-table">
+        <caption>Registered Users</caption>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Role</th>
+            <th scope="col">Subscribed</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- New rows will be appended here by JavaScript -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ====== Images with appropriate alt text ====== -->
+    <section id="gallery" aria-labelledby="gallery-title">
+      <h2 id="gallery-title">Image Gallery</h2>
+      <p class="muted">Images include meaningful <code>alt</code> text for accessibility. Replace the <code>src</code> with your own images if you like.</p>
+      <div class="gallery">
+        <figure>
+          <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800&q=80"
+               alt="Laptop on a desk with code editor open" />
+          <figcaption>Workspace</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=800&q=80"
+               alt="People collaborating around a table" />
+          <figcaption>Team</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=800&q=80"
+               alt="Abstract illustration of interconnected nodes" />
+          <figcaption>Network</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ====== Ordered & Unordered Lists ====== -->
+    <section id="lists" aria-labelledby="lists-title">
+      <h2 id="lists-title">Lists</h2>
+      <h3>Ordered List: Steps to Get Started</h3>
+      <ol>
+        <li>Open this file in a browser.</li>
+        <li>Complete the sign-up form.</li>
+        <li>Hit <strong>Submit</strong> to add your entry to the table.</li>
+        <li>Browse the gallery and features.</li>
+      </ol>
+
+      <h3>Unordered List: Helpful Links</h3>
+      <ul>
+        <li><a href="#signup">Jump to Form</a></li>
+        <li><a href="#data">View the Table</a></li>
+        <li><a href="#gallery">See Images</a></li>
+      </ul>
+    </section>
+
+    <!-- ====== Contact / Footer Anchor ====== -->
+    <section id="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact</h2>
+      <p class="muted">This is a demo page. Add your contact details or a contact form here.</p>
+    </section>
+  </main>
+
+  <footer>
+    <small>© <span id="year"></span> Demo Co. Built for an HTML/CSS/JS example.</small>
+  </footer>
+
+  <script>
+    // Simple client-side handler to add form data to the table
+    (function () {
+      const form = document.getElementById('user-form');
+      const tbody = document.querySelector('#users-table tbody');
+      const year = document.getElementById('year');
+      if (year) year.textContent = new Date().getFullYear();
+
+      let counter = 0;
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const role = document.getElementById('role').value;
+        const subscribed = document.getElementById('subscribe').checked ? 'Yes' : 'No';
+
+        if (!name || !email || !role) {
+          alert('Please fill out all required fields.');
+          return;
+        }
+
+        counter += 1;
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${counter}</td>
+          <td>${escapeHtml(name)}</td>
+          <td>${escapeHtml(email)}</td>
+          <td>${escapeHtml(role)}</td>
+          <td>${subscribed}</td>
+        `;
+        tbody.appendChild(tr);
+
+        form.reset();
+        document.getElementById('name').focus();
+      });
+
+      // Minimal HTML escaping for inserted text
+      function escapeHtml(str) {
+        return str
+          .replaceAll('&', '&amp;')
+          .replaceAll('<', '&lt;')
+          .replaceAll('>', '&gt;')
+          .replaceAll('"', '&quot;')
+          .replaceAll("'", '&#39;');
+      }
+    })();
+  </script>
+</body>
+</html>

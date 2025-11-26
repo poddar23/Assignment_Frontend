@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ID vs Class Styling</title>
+  <style>
+    /* Style for a unique element using ID */
+    #special-heading {
+      color: white;
+      background-color: #4caf50;
+      padding: 15px;
+      border-radius: 6px;
+      text-align: center;
+    }
+
+    /* Style for reusable elements using CLASS */
+    .highlight-box {
+      background-color: #f0f0f0;
+      border: 2px solid #ccc;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ID applied to a unique element -->
+  <h1 id="special-heading">Welcome to My Page</h1>
+
+  <!-- Class applied to multiple elements -->
+  <div class="highlight-box">
+    This is the first highlighted box using a class.
+  </div>
+
+  <div class="highlight-box">
+    This is the second highlighted box using the same class.
+  </div>
+
+  <p class="highlight-box">
+    Even a paragraph can use the <code>highlight-box</code> class.
+  </p>
+
+</body>
+</html>

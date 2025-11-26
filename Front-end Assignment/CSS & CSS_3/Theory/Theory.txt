@@ -1,0 +1,310 @@
+Question 1: What is a CSS selector? Provide examples of element, class, and ID selectors
+Ans: A CSS selector is a pattern used to select the HTML element(s) you want to style. It tells the browser which elements a set of CSS rules should apply to.
+1. Element Selector
+
+Targets all elements of a specific type.
+p {
+  color: blue;
+}
+
+2. Class Selector
+
+Targets elements with a specific class attribute. Uses a dot (.)
+.box {
+  border: 1px solid black;
+}
+
+. ID Selector
+
+Targets a single element with a unique ID. Uses a hash (#).
+#header {
+  background-color: lightgray;
+}
+=========================================================================================================
+Question 2: Explain the concept of CSS specificity. How do conflicts between multiple styles 
+get resolved? 
+Ans: CSS specificity determines which CSS rule is applied when multiple rules target the same element. It’s like a scoring system—rules with higher specificity override those with lower specificity.
+Specificity Hierarchy (from strongest to weakest)
+
+Inline styles
+
+<p style="color: red;">Text</p>
+ID selectors
+
+#title { color: blue; }
+Class, attribute & pseudo-class selectors
+
+.subtitle { color: green; }
+a[href] { color: purple; }
+:hover { color: yellow; }
+Element & pseudo-element selectors
+
+h1 { color: orange; }
+p::first-line { font-weight: bold; }
+Universal selector & inherited styles
+
+* { margin: 0; }
+==========================================================================================================
+
+Question 3: What is the difference between internal, external, and inline CSS? Discuss the 
+advantages and disadvantages of each approach.
+Ans: 
+Advantages:
+
+Quick for testing or small changes
+
+Overrides other styles due to high specificity
+
+No need for a separate file
+
+ Disadvantages:
+
+Not reusable—must repeat styles
+
+Makes HTML messy and harder to maintain
+
+Poor performance for large projects
+==========================================================================================================
+Question 1: Explain the CSS box model and its components (content, padding, border, 
+margin). How does each affect the size of an element?
+Ans: The CSS box model describes how every HTML element is structured and how its total size is calculated. Think of each element as a box made up of four layers:
+ ---------------------------
+|         Margin            |
+|  -----------------------  |
+| |       Border          | |
+| |  -------------------  | |
+| | |     Padding       | | |
+| | |  ---------------  | | |
+| | | |   Content     | | | |
+| | |  ---------------  | | |
+| |  -------------------  | |
+|  -----------------------  |
+ ---------------------------
+
+==========================================================================================================
+Question 2: What is the difference between border-box and content-box box-sizing in 
+CSS? Which is the default? 
+Ans: Width and height apply only to the content area
+
+Padding and border are added on top, increasing total size
+
+Border Box :
+Width and height include content + padding + border
+
+Total size stays fixed—easier for layouts
+| Property       | content-box (default)     | border-box                 |
+| -------------- | ------------------------- | -------------------------- |
+| Width includes | Content only              | Content + padding + border |
+| Total size     | Grows with padding/border | Stays fixed                |
+
+==========================================================================================================
+Question 1: What is CSS Flexbox, and how is it useful for layout design? Explain the terms 
+flex-container and flex-item. 
+Ans: CSS Flexbox (Flexible Box Layout) is a layout system in CSS designed to make arranging elements in rows or columns easier. It allows items to automatically adjust their size, spacing, and alignment—even when screen sizes change—making it ideal for responsive web design.
+
+Flexbox simplifies tasks like:
+ Centering items horizontally or vertically
+ Creating equal-width columns
+ Handling dynamic spacing between elements
+ Reordering items without changing HTML
+ =========================================================================================================
+ Question 2: Describe the properties justify-content, align-items, and flex-direction used 
+in Flexbox.
+Ans: CSS Flexbox is a layout system designed to give flexible, responsive control over how elements are arranged inside a container. Instead of relying on floats, tables, or manual spacing, Flexbox allows elements to automatically adjust based on available space.
+
+Flexbox works on two main concepts:
+
+1. Flex Container
+
+The parent element with display: flex
+
+Controls how items behave inside it with Flexbox properties
+2. Flex Items
+
+The direct children of the flex container
+
+Automatically become flexible boxes that can grow, shrink, or align
+
+==========================================================================================================
+Question 1: Explain CSS Grid and how it differs from Flexbox. When would you use Grid over 
+Flexbox? 
+Ans: CSS Grid is a two-dimensional layout system that allows you to design webpages using rows and columns at the same time. It gives precise control over spacing, alignment, and placement of items within a structured grid.
+
+Example:.container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 20px;
+}
+1. Layout Direction
+
+Grid → two-dimensional (rows + columns)
+
+Flexbox → one-dimensional (either row or column)
+
+2. Item Placement
+
+Grid allows placing items anywhere using row/column lines
+
+Flexbox flows items naturally based on content order
+
+3. Structure
+
+Grid is best for planned, structured layouts
+
+Flexbox adapts better to content-driven layouts
+
+4. Parent vs Child Control
+
+Grid mainly controlled by the container
+
+Flexbox gives more control to individual flex items
+
+ When to Use Grid Over Flexbox
+
+Use CSS Grid when:
+ You need multi-row and multi-column layouts
+ You’re designing full webpage layouts, dashboards, card grids, galleries
+ You know your layout structure ahead of time
+ You want symmetrical or aligned columns and rows
+
+Use Flexbox when:
+ You’re aligning items in a single row or column
+ You need flexible navigation bars, buttons, forms, or small UI components
+ Content size dictates layout flow
+ ========================================================================================================
+ Question 2: Describe the grid-template-columns, grid-template-rows, and grid-gap 
+properties. Provide examples of how to use them.
+Ans: Defines how many columns a grid has and how wide each column should be.
+It creates the vertical structure of the grid.
+
+Example meanings:
+
+200px 200px → two fixed-width columns
+
+1fr 2fr → flexible columns, second twice as wide
+
+repeat(3, 1fr) → three equal columns
+grid-template-rows
+
+Defines how many rows a grid has and how tall each row should be.
+It creates the horizontal structure of the grid.
+
+Example meanings:
+
+100px auto → first row fixed, second adjusts to content
+
+repeat(4, 150px) → four equal rows
+grid-gap (now just gap)
+
+Defines the spacing between grid items—like gutters in a layout.
+It does not add space inside items, only between them.
+
+Example meanings:
+
+gap: 20px → equal row & column spacing
+
+row-gap: 10px; column-gap: 30px; → different spacing
+===========================================================================================================
+Question 1: What are media queries in CSS, and why are they important for responsive 
+design? 
+Ans: Media queries are a feature in CSS that allow you to apply different styles depending on the characteristics of the user’s device, such as:
+
+Screen width or height
+
+Device type (screen, print, etc.)
+
+Orientation (landscape or portrait)
+
+Resolution or pixel density
+
+They enable a single website to adapt its layout and design to different devices without changing the HTML.
+@media (condition) {
+  /* CSS rules go here */
+}
+
+==========================================================================================================
+Question 2: Write a basic media query that adjusts the font size of a webpage for screens 
+smaller than 600px. 
+Ans:A media query lets you apply CSS rules conditionally based on the device’s characteristics, like screen width.
+
+When designing for smaller screens (like phones), you often need to adjust font sizes to improve readability without breaking the layout.
+
+Key points:
+
+@media is the keyword to start a media query.
+
+Conditions are placed in parentheses, e.g., (max-width: 600px) for screens 600px wide or smaller.
+
+CSS rules inside the media query override the default styles when the condition is met.
+/* Default font size for desktop */
+body {
+  font-size: 18px;
+}
+
+/* Media query for screens smaller than 600px */
+@media (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
+}
+========================================================================================================
+Question 1: Explain the difference between web-safe fonts and custom web fonts. Why 
+might you use a web-safe font over a custom font? 
+Ans: Web-safe fonts are fonts that are commonly installed on most operating systems and devices, ensuring that text looks consistent without needing extra downloads.
+
+Examples:
+
+Serif: Times New Roman, Georgia
+
+Sans-serif: Arial, Helvetica, Verdana
+
+Monospace: Courier New, Lucida Console
+
+Advantages:
+
+No additional HTTP requests → faster page load
+
+Guaranteed to display on almost any device
+
+Simple and reliable fallback options
+
+Disadvantages:
+
+Limited styling options
+
+Less unique; common appearance across sites
+
+ 2. Custom Web Fonts
+
+Definition:
+Custom web fonts are fonts not necessarily installed on a user’s device. They are loaded via CSS (@font-face) or services like Google Fonts, Adobe Fonts, etc.
+
+Examples:
+
+Google Fonts: Roboto, Lato, Montserrat
+
+Adobe Fonts: Proxima Nova, Futura PT
+
+Advantages:
+
+Unique, brand-specific design
+
+Greater creative flexibility
+
+Disadvantages:
+
+Additional HTTP requests → slower load times
+
+May not render if the font fails to load
+
+Can require fallbacks for compatibility
+==========================================================================================================
+Question 2: What is the font-family property in CSS? How do you apply a custom Google 
+Font to a webpage? 
+Ans: The font-family property in CSS specifies the typeface that should be applied to text. You can list multiple fonts as a fallback in case the first one isn’t available.
+selector {
+  font-family: font1, font2, generic-family;
+}
+
+===============================================xxx========================================================
