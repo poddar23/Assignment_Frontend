@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .clock {
+        background-color: black;
+        color: white;
+        padding: 30px;
+        font-size: 100px;
+        height: 200px;
+
+        width: 700px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="clock" id="clock">00:00:00</div>
+    <script>
+      function updateClock() {
+        let now = new Date();
+
+        let h = now.getHours();
+        let m = now.getMinutes();
+        let s = now.getSeconds();
+        // h = h < 10 ? "0" + h : h;
+        m = m < 10 ? "0" + m : m;
+        s = s < 10 ? "0" + s : s;
+
+        let hours = h;
+        let ampm = hours > 12 ? "PM" : "AM";
+        hours = hours % 12;
+        hours = hours === 0 ? 12 : hours;
+
+        document.getElementById("clock").innerHTML =
+          `${hours} : ${m} : ${s} ${ampm}`;
+      }
+      setInterval(updateClock, 1000);
+      updateClock();
+    </script>
+  </body>
+</html>

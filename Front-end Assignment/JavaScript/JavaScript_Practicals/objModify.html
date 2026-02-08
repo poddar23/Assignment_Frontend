@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Create a JavaScript object carwith properties brand, model, and year. Use
+JavaScript to:
+• Access and print the car’s brand and model.
+• Update the yearproperty.
+• Add a new property colorto the car object. -->
+    <script>
+      let car = {
+        Brand: "BMW",
+        Model: "X7",
+        Year: 2015,
+      };
+      console.log("Brand =", car.Brand);
+      console.log("Model =", car.Model);
+
+      //updated year
+      car.Year = 2013;
+      console.log(car);
+
+      //add new property
+      car.color = "Red";
+      console.log(car);
+    </script>
+  </body>
+</html>
