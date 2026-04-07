@@ -39,6 +39,7 @@ function Category() {
 
   const handleClick = (e) => {
     e.preventDefault();
+    console.log(cat);
     dispatch(addCategory(cat))
 
   }
@@ -50,13 +51,17 @@ function Category() {
   }
   useEffect(
     () => {
-      dispatch(getCategory())    
+      dispatch(getCategory())
+      
       
     }
     , [catMsg])
 
     useEffect(()=>{
+        console.log('edit');
         setCat(singleCat ?? {})
+
+        console.log(cat);
         
         
     },[singleCat])

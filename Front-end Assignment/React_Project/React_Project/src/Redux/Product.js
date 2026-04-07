@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
-import { db } from "../Firebase/firebase";
+import {db} from "../Firebase/firebase";
 
 
 
@@ -29,21 +29,20 @@ export const getProducts = createAsyncThunk('getProducts', async () => {
         snapShort1.forEach((doc) => {
             arrayCat.push({ ...doc.data(), id: doc.id })
         })
-        console.log("inproduct",arrayCat);
-        
-
-        //product Array
         const doc = collection(db, 'product');
         const snapShort = await getDocs(doc);
+        
         let arrayPro = [];
-        snapShort.forEach((doc) => {
-            let res=arrayCat.find((index)=>index.id==doc.data().cname)
-            console.log('matchcat',res.cname);
-            
-            arrayPro.push({ ...doc.data(), id: doc.id, catname:res.cname })
+       if(snapShort){
+           snapShort.forEach((doc) => {
+           const res = arrayCat.find((index,i)=>{
+                if(index.id==doc.data().cname){
+                    return index
+                }
+           })
+        arrayPro.push({ ...doc.data(), id: doc.id,  catname: res?.cname ?? ""})
         })
-       console.log("products",arrayPro);
-       
+       }
         return arrayPro;
 
     } catch (error) {
@@ -52,45 +51,45 @@ export const getProducts = createAsyncThunk('getProducts', async () => {
     }
 })
 
-// export const deleteCategory = createAsyncThunk('deleteCategory', async (cid) => {
-//     try {
-//         console.log(cid);
-//         const docRef = doc(db, 'category', cid);
-//         const res = await deleteDoc(docRef);
-//         const result = {msg: "Category Deleted",}
-//         return result;
-//     } catch (error) {
-//         return error
-//         console.log(error);
-//     }
-// })
+export const deleteProduct = createAsyncThunk('deleteProduct', async (pid) => {
+    try {
+        console.log(cid);
+        const docRef = doc(db, 'product', pid);
+        const res = await deleteDoc(docRef);
+        const result = {msg: "Product Deleted",}
+        return result;
+    } catch (error) {
+        return error
+        console.log(error);
+    }
+})
 
-// export const getCatById = createAsyncThunk('getCatById',async(cid)=>{
-//     try {
-//         const docRef = doc(db, 'category', cid);
-//         const res = await getDoc(docRef);
-//         return res.data();
+export const getProductById = createAsyncThunk('getProductById',async(pid)=>{
+    try {
+        const docRef = doc(db, 'product', pid);
+        const res = await getDoc(docRef);
+        return res.data();
         
-//     } catch (error) {
-//         return error
-//     }
-// })
+    } catch (error) {
+        return error
+    }
+})
 
 
-// export const updateCategory = createAsyncThunk('updateCategory',async(obj)=>{
-//     try {
-//          const docRef = doc(db, 'category', obj.cid);
-//          const res = await updateDoc(docRef,obj.data);
+export const updateProduct = createAsyncThunk('updateProduct',async(obj)=>{
+    try {
+         const docRef = doc(db, 'product', obj.pid);
+         const res = await updateDoc(docRef,obj.data);
          
-//             const result = {
-//                 msg: "Category updated",
-//             }
-//             return result;
+            const result = {
+                msg: "Product updated",
+            }
+            return result;
         
-//     } catch (error) {
-//         return error
-//     }
-// })
+    } catch (error) {
+        return error
+    }
+})
 
 
 const ProductSlice = createSlice({
@@ -109,7 +108,7 @@ const ProductSlice = createSlice({
         })
             .addCase(addProduct.fulfilled, (state, action) => {
                 state.isloadingP = false;
-                state.proMsg = action.payload.msg;
+                state.MsgMsg = action.payload.msg;
             })
             .addCase(addProduct.rejected, (state, action) => {
                 state.proError = action.payload
@@ -124,36 +123,37 @@ const ProductSlice = createSlice({
             .addCase(getProducts.rejected, (state, action) => {
                 state.proError = action.payload
             })
-            // .addCase(deleteCategory.pending, (state, action) => {
-            //     state.isloading = true;
-            // })
-            // .addCase(deleteCategory.fulfilled, (state, action) => {
-            //     state.isloading = false;
-            //     state.catMsg = action.payload.msg;
-            // })
-            // .addCase(deleteCategory.rejected, (state, action) => {
-            //     state.error = action.payload
-            // })
-            // .addCase(getCatById.pending, (state, action) => {
-            //     state.isloading = true;
-            // })
-            // .addCase(getCatById.fulfilled, (state, action) => {
-            //     state.isloading = false;
-            //     state.singleCat = action.payload;
-            // })
-            // .addCase(getCatById.rejected, (state, action) => {
-            //     state.error = action.payload
-            // })
-            // .addCase(updateCategory.pending, (state, action) => {
-            //     state.isloading = true;
-            // })
-            // .addCase(updateCategory.fulfilled, (state, action) => {
-            //     state.isloading = false;
-            //     state.catMsg = action.payload.msg;
-            // })
-            // .addCase(updateCategory.rejected, (state, action) => {
-            //     state.error = action.payload
-            // })
+            .addCase(deleteProduct.pending, (state, action) => {
+                state.isloadingP = true;
+            })
+            .addCase(deleteProduct.fulfilled, (state, action) => {
+                state.isloadingP = false;
+                state.proMsg = action.payload.msg;
+            })
+            .addCase(deleteProduct.rejected, (state, action) => {
+                state.proError = action.payload
+            })
+            .addCase(getProductById.pending, (state, action) => {
+                state.isloadingP = true;
+            })
+            .addCase(getProductById.fulfilled, (state, action) => {
+                state.isloadingP = false;
+                state.proMsg = "Product find";
+                state.singleProduct = action.payload;
+            })
+            .addCase(getProductById.rejected, (state, action) => {
+                state.proError = action.payload
+            })
+            .addCase(updateProduct.pending, (state, action) => {
+                state.isloadingP = true;
+            })
+            .addCase(updateProduct.fulfilled, (state, action) => {
+                state.isloadingP = false;
+                state.proMsg = action.payload.msg;
+            })
+            .addCase(updateProduct.rejected, (state, action) => {
+                state.proError = action.payload
+            })
             
     }
 })

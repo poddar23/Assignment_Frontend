@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCategory } from '../Redux/Category';
-import { addProduct, getProducts } from '../Redux/Product';
+import { addProduct, deleteProduct, getProductById, getProducts, updateProduct } from '../Redux/Product';
 
 function Product() {
   const dispatch = useDispatch();
+  const [eid,setEid]= useState(null)
   const { catArray } = useSelector((state) => state.category)
-  const {proError,proMsg,isloadingP,productArray}=useSelector((state)=>state.product)
+  const {proError,proMsg,isloadingP,productArray,singleProduct}=useSelector((state)=>state.product)
   const [product, setProduct] = useState({
     pname: '',
     cname: '',
@@ -15,6 +16,7 @@ function Product() {
     description: ''
 
   })
+
 
   const cleanUp = ()=>{
        setProduct({
@@ -71,7 +73,15 @@ function Product() {
   useEffect(() => {
     dispatch(getCategory())
     dispatch(getProducts())
-  }, [])
+    
+  }, [proMsg])
+
+  useEffect(()=>{
+      setProduct(singleProduct ?? {})
+     
+  },[singleProduct,eid])
+
+   
   return (
     <div>
       <h2 className='text-2xl'>Add Product</h2>
@@ -91,11 +101,11 @@ function Product() {
               <div class="sm:col-span-3">
                 <label for="first-name" class="block text-sm/6 font-medium text-gray-900">Category name</label>
                 <div class="mt-2">
-                  <select id="first-name" type="text" name="cname" autocomplete="given-name" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" required onChange={handleChange} value={product.cname}>
+                  <select id="first-name" type="text" name="cname" autocomplete="given-name" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" required onChange={handleChange} value={product.cname ?? ''}>
                     <option value="">Select</option>
                     {
                       catArray && catArray.map((index, i) => (
-                        <option value={index.id}>{index.cname}</option>
+                        <option value={index.id}>{index.cname ?? ''}</option>
                       ))
                     }
                   </select>
@@ -112,7 +122,7 @@ function Product() {
               <div class="sm:col-span-3">
                 <label for="last-name" class="block text-sm/6 font-medium text-gray-900">Product image</label>
                 <div class="mt-2">
-                  <input id="last-name" type="file" name="pimage[]" autocomplete="family-name" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" required onChange={handleFile} value={product.pimage} multiple />
+                  <input id="last-name" type="file" name="pimage[]" autocomplete="family-name" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" required onChange={handleFile} multiple />
                 </div>
               </div>
               <div class="sm:col-span-3">
@@ -133,7 +143,17 @@ function Product() {
 
               <div class="mt-3">
 
-                <button type='button' className='p-2 bg-blue-600 text-white' onClick={handleClick}>Submit</button>
+              {
+                  eid && eid != null ?
+                  <button type='button' className='p-2 bg-blue-600 text-white' onClick={()=>{
+                    dispatch( updateProduct({
+                       pid:eid,
+                       data:product
+                    }))
+                  }}>Update</button>
+                  :
+                    <button type='button' className='p-2 bg-blue-600 text-white' onClick={handleClick}>Submit</button>
+              }
               </div>
             </div>
           </div>
@@ -166,11 +186,21 @@ function Product() {
                             <td class="border border-gray-300 px-4 py-2 ">
                               {
                                 index.pimage && index.pimage.map((index)=>(
-                                    <img src={index} alt="" height={"100px"} width={"100px"} />
+                                    <img src={index ?? ''} alt="" height={"100px"} width={"100px"} />
                                 ))
                               }
                             </td>
                              <td class="border border-gray-300 px-4 py-2">{index.description}</td>
+                             <td>
+                              <button type='button' className='p-3 bg-red-500 text-white'><i class="fa-solid fa-trash" onClick={()=>{
+                                  dispatch(deleteProduct(index.id))
+                              }}></i></button>
+                              <button type='button' className='p-3 bg-green-500 ms-2 text-white'><i class="fa-solid fa-pen-to-square" onClick={()=>{
+                                  alert(index.id)
+                                  setEid(index.id);
+                                  dispatch(getProductById(index.id))
+                              }}></i></button>
+                             </td>
                           </tr>
                       ))
                     }

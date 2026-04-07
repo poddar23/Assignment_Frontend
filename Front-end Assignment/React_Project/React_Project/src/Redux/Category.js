@@ -28,7 +28,7 @@ export const getCategory = createAsyncThunk('getCategory', async () => {
         snapShort.forEach((doc) => {
             arrayCat.push({ ...doc.data(), id: doc.id })
         })
-        console.log("catdata", arrayCat);
+       
         return arrayCat;
 
     } catch (error) {
