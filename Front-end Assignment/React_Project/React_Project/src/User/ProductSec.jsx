@@ -1,14 +1,38 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProducts } from '../Redux/Product';
+import { CategoryContext } from '../Context/CategoryContext';
 
 function ProductSec() {
   const { productArray } = useSelector((state) => state.product)
   const dispatch = useDispatch();
+  const {catname,setCatName}= useContext(CategoryContext)
+  //console.log(productArray);
 
+ 
   useEffect(() => {
-    dispatch(getProducts())
+    dispatch(getProducts())   
   }, [])
+
+   const FilterProduct = useMemo(()=>{
+        let newArray ;
+        if(catname != ''){
+       
+          newArray  = productArray.filter((index,i)=>{
+               if(index.cname == catname){
+                  return index
+               }
+          })
+        
+        }
+        else{
+       
+            newArray = productArray
+        }
+       
+        return newArray
+  },[catname,productArray])
+  
   return (
     <div>
 
@@ -19,7 +43,7 @@ function ProductSec() {
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
 
           {
-            productArray && productArray.map((index, i) => (
+            FilterProduct && FilterProduct.map((index, i) => (
               <div class="bg-white shadow rounded-lg overflow-hidden hover:shadow-lg">
                 <img src={index.pimage} class="w-100 h-48 object-cover" />
                 <div class="p-4">

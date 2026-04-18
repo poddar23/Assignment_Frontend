@@ -5,6 +5,8 @@ import { Route, Routes } from 'react-router-dom'
 import Adminindex from './Admin/Adminindex'
 import Userindex from './User/Userindex'
 import './App.css'
+import Registraion from './User/Registration'
+import Login from './User/Login'
 
 
 
@@ -16,6 +18,10 @@ function App() {
       
        <Routes>
          <Route path='/' element={<Userindex />}></Route>
+         <Route path='/registration' element={<Registraion/>}></Route>
+         <Route path='/login' element={<Login/>}></Route>
+
+
 
 
 

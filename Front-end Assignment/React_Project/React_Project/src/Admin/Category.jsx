@@ -34,6 +34,7 @@ function Category() {
         ['cimage']: reader.result
       })
     }
+    e.target.value = null;
 
   }
 
@@ -41,6 +42,7 @@ function Category() {
     e.preventDefault();
     console.log(cat);
     dispatch(addCategory(cat))
+    setCat("")
 
   }
 
@@ -48,6 +50,8 @@ function Category() {
     e.preventDefault();
       let obj ={data:cat,cid:cid};
       dispatch(updateCategory(obj))
+    setCat("")
+
   }
   useEffect(
     () => {

@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCategory } from '../Redux/Category';
+import { CategoryContext } from '../Context/CategoryContext';
 
 function CategorySec() {
   const {catArray}=useSelector((state)=>state.category);
+  const {catname,setCatName}=useContext(CategoryContext)
   
  const dispatch = useDispatch()
   useEffect(()=>{
@@ -18,7 +20,8 @@ function CategorySec() {
           catArray && catArray.map((index,i)=>(
              <div class="bg-white shadow p-4 rounded-lg text-center hover:shadow-lg cursor-pointer">
               <button  onClick={()=>{
-                alert(index.id)
+                
+                setCatName(index.id)
               }}>
               <img src={index.cimage} alt="" />
               {index.cname}</button></div>
