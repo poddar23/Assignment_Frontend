@@ -1,0 +1,22 @@
+{
+  "fruits": [
+    {
+      "name": "applesss",
+      "price": 1200,
+      "description": "juicy fruit",
+      "id": "1777630745549"
+    },
+    {
+      "id": "1777630843040",
+      "name": "apple",
+      "price": 1230,
+      "description": "juicy"
+    },
+    {
+      "id": "1777630843168",
+      "name": "apple",
+      "price": 1230,
+      "description": "juicy"
+    }
+  ]
+}
