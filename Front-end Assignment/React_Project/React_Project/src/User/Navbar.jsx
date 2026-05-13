@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom'
-import { logout } from '../Redux/User';
+import { clearMsg, logout } from '../Redux/User';
 function Navbar() {
 
   const [logged,setLogged]= useState(false);
@@ -24,6 +24,7 @@ function Navbar() {
 
   const logout1 = ()=>{
       localStorage.removeItem('loggedUser');
+      dispatch(clearMsg())
       dispatch(logout())
       console.log(islogged);
       
@@ -31,21 +32,25 @@ function Navbar() {
 
   return (
     <div >
-       <nav class="bg-white shadow-md">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-      <h1 class="text-2xl font-bold text-blue-600">ShopEasy</h1>
+       <nav className="bg-white shadow-md">
+    <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <h1 className="text-2xl font-bold text-blue-600">ShopEasy</h1>
 
-      <ul class="hidden md:flex space-x-6 font-medium">
-        <li><a href="#" class="hover:text-blue-600">Home</a></li>
-        <li><a href="#categories" class="hover:text-blue-600">Categories</a></li>
-        <li><a href="#catalog" class="hover:text-blue-600">Product Catalog</a></li>
+      <ul className="hidden md:flex space-x-6 font-medium">
+        <li><a href="#" className="hover:text-blue-600">Home</a></li>
+        <li><a href="#categories" className="hover:text-blue-600">Categories</a></li>
+        <li><a href="#catalog" className="hover:text-blue-600">Product Catalog</a></li>
         {
-           islogged==true ? <li>Welcome:{user1.username} <button onClick={logout1}>Logout</button></li> : <li><NavLink class="hover:text-blue-600" to={'/registration'}>Registraion</NavLink></li>
+           islogged==true ? 
+             <><li>Welcome:{user1.username} <button onClick={logout1}>Logout</button></li>
+            <NavLink className="hover:text-blue-600" to={'/cart'}><i className="fa-solid fa-cart-arrow-down"></i></NavLink>
+             </>
+           : <li><NavLink className="hover:text-blue-600" to={'/registration'}>Registraion</NavLink></li>
         }
        
       </ul>
 
-      <button class="md:hidden text-2xl">☰</button>
+      <button className="md:hidden text-2xl">☰</button>
     </div>
   </nav>
     </div>

@@ -8,7 +8,7 @@ export const userRegistration = createAsyncThunk('userRegistration' , async(data
         const doc= collection(db,'user')
         const res = await addDoc(doc,data);
       const result={
-        userMsg:"user added",
+        msg:"user added",
       }
       return result;
     }catch(error){
@@ -41,6 +41,9 @@ export const userLogin = createAsyncThunk('userLogin',async(loginUser)=>{
           
         });
         let response = { msg:"Successfully login",userInfo:user};
+        if(response){
+            localStorage.setItem('loggedUser',JSON.stringify(user))
+        }
         return response
         
 
@@ -61,7 +64,12 @@ export const  UserSlice=createSlice({
         
     } 
     ,
-    reducers:{},
+    reducers:{
+          clearMsg: (state) => {
+            state.userMsg = null;
+        }
+    },
+
     extraReducers:(builder)=>{
 builder.addCase(userRegistration.pending, (state, action) => {
             state.isLoading = true;
@@ -69,6 +77,8 @@ builder.addCase(userRegistration.pending, (state, action) => {
             .addCase(userRegistration.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.userMsg = action.payload.msg;
+                console.log(state.userMsg);
+                
             })
             .addCase(userRegistration.rejected, (state, action) => {
                 state.userError = action.payload
@@ -91,5 +101,8 @@ builder.addCase(userRegistration.pending, (state, action) => {
             })
     }
 })
+
+export const { clearMsg } = UserSlice.actions;
+
 const UserReducer=UserSlice.reducer
 export default UserReducer

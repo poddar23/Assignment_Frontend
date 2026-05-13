@@ -7,6 +7,7 @@ import Userindex from './User/Userindex'
 import './App.css'
 import Registraion from './User/Registration'
 import Login from './User/Login'
+import Viewcart from './User/Viewcart'
 
 
 
@@ -20,6 +21,7 @@ function App() {
          <Route path='/' element={<Userindex />}></Route>
          <Route path='/registration' element={<Registraion/>}></Route>
          <Route path='/login' element={<Login/>}></Route>
+         <Route path='/cart' element={<Viewcart/>}></Route>
 
 
 

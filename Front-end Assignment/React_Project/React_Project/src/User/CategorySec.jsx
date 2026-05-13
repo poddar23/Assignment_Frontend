@@ -13,14 +13,14 @@ function CategorySec() {
   },[])
   return (
     <div>
-      <section id="categories" class="max-w-7xl mx-auto px-4 py-16">
-    <h3 class="text-3xl font-semibold mb-8 text-center">Shop by Category</h3>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <section id="categories" className="max-w-7xl mx-auto px-4 py-16">
+    <h3 className="text-3xl font-semibold mb-8 text-center">Shop by Category</h3>
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
       {
           catArray && catArray.map((index,i)=>(
-             <div class="bg-white shadow p-4 rounded-lg text-center hover:shadow-lg cursor-pointer">
+             <div className="bg-white shadow p-4 rounded-lg text-center hover:shadow-lg cursor-pointer">
               <button  onClick={()=>{
-                
+                alert(index.id)
                 setCatName(index.id)
               }}>
               <img src={index.cimage} alt="" />
