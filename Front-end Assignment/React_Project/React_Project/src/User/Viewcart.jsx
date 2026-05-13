@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteCartData, updatecartData, viewCartData } from '../Redux/Cart';
 import axios from 'axios';
-import { addDoc, collection,query,getDocs,deleteDoc,where } from 'firebase/firestore';
+import { addDoc,doc, collection,query,getDocs,deleteDoc,where } from 'firebase/firestore';
 import { db } from '../Firebase/firebase';
 
 
@@ -49,13 +49,15 @@ function Viewcart() {
           const cartRef = collection(db, "cart");
 
         // query
-        const q = query(cartRef, where("userid", "==", userAuth.userid));
+        const q = query(cartRef, where("userid", "==", userAuth.id));
 
         // get matched docs
         const querySnapshot = await getDocs(q);
 
         // delete all docs
         querySnapshot.forEach(async (item) => {
+          console.log(item.id);
+          
 
             await deleteDoc(doc(db, "cart", item.id));
 
@@ -67,9 +69,9 @@ function Viewcart() {
       },
 
       prefill: {
-        name: "Megha",
-        email: "test@gmail.com",
-        contact: "9999999999",
+        name: "Ronak",
+        email: "ronak@gmail.com",
+        contact: "8402833375",
       },
 
       theme: {
@@ -81,7 +83,7 @@ function Viewcart() {
 
     rzp.open();
   };
-//========================
+//========================================================
     const updateQty= (cartid,qty)=>{
         console.log(cartid);
         console.log(qty);
